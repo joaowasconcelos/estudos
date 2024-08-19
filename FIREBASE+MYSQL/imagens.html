@@ -1,0 +1,38 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Images</title>
+  <style>
+    img {
+      max-width: 200px;
+      margin: 10px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Uploaded Images</h1>
+  <div id="images-container"></div>
+
+  <script>
+    async function loadImages() {
+      try {
+        const response = await fetch('/images');
+        console.log(response)
+        const imageUrls = await response.json();
+        const container = document.getElementById('images-container');
+        imageUrls.forEach(url => {
+          const img = document.createElement('img');
+          img.src = url;
+          container.appendChild(img);
+        });
+      } catch (error) {
+        console.error('Error loading images:', error);
+      }
+    }
+
+    loadImages();
+  </script>
+</body>
+</html> -->

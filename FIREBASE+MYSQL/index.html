@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Selecionar Imagens</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f9;
+      margin: 0;
+      padding: 20px;
+    }
+
+    h1 {
+      text-align: center;
+      color: #333;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+    }
+
+    th, td {
+      padding: 15px;
+      text-align: center;
+      border: 1px solid #ddd;
+    }
+
+    th {
+      background-color: #4CAF50;
+      color: white;
+    }
+
+    tr:nth-child(even) {
+      background-color: #f2f2f2;
+    }
+
+    tr:hover {
+      background-color: #ddd;
+    }
+
+    img {
+      max-width: 200px;
+      max-height: 200px;
+      border-radius: 5px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    button {
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+      margin: 4px 2px;
+      cursor: pointer;
+      border-radius: 5px;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #45a049;
+    }
+
+    button:active {
+      background-color: #388e3c;
+    }
+  </style>
+</head>
+<body>
+  <h1>Selecione a Imagem</h1>
+  <table id="image-table">
+    <thead>
+      <tr>
+        <th>Imagem</th>
+        <th>Ação</th>
+      </tr>
+    </thead>
+    <tbody>
+    </tbody>
+  </table>
+
+  <script>
+    async function fetchImages() {
+      try {
+        const response = await fetch('/images');
+        const imageUrls = await response.json();
+        const tableBody = document.querySelector('#image-table tbody');
+        
+        imageUrls.forEach(url => {
+          const row = document.createElement('tr');
+          
+          const imgCell = document.createElement('td');
+          const img = document.createElement('img');
+          img.src = url;
+          img.alt = 'Imagem do Firebase';
+          imgCell.appendChild(img);
+          
+          const actionCell = document.createElement('td');
+          const button = document.createElement('button');
+          button.textContent = 'Selecionar';
+          button.onclick = () => handleSelectImage(url);
+          actionCell.appendChild(button);
+          
+          row.appendChild(imgCell);
+          row.appendChild(actionCell);
+          
+          tableBody.appendChild(row);
+        });
+      } catch (error) {
+        console.error('Erro ao buscar imagens:', error);
+      }
+    }
+
+    function handleSelectImage(url) {
+      alert(`Imagem selecionada: ${url}`);
+      // Aqui você pode implementar o que deve acontecer quando a imagem é selecionada.
+      // Por exemplo, você pode enviar a URL da imagem para o servidor ou atualizar o frontend com a imagem selecionada.
+    }
+
+    fetchImages();
+  </script>
+</body>
+</html>

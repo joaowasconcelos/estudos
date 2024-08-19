@@ -1,0 +1,33 @@
+<body>
+    <main>
+
+    </main>
+</body>
+
+<script>
+    async function getContent() {
+        try {
+           const response =  await fetch("http://localhost:3000/selectlogin")
+           const data = await response.json(); // Converta a resposta para JSON
+           console.log(data)
+           show(data); // Exiba os dados no console
+          
+        } catch (error) {
+            console.error(error)
+        }
+        
+    }
+    function show(users) {
+            let output = "";
+
+            for (let user of users) {
+                output += `<li>${user.id}</li>`;
+                output += `<ul>${user.login}</ul>`;
+                output += `<ul>${user.password}</ul>`;
+            }
+
+            document.querySelector("main").innerHTML = output;
+        }
+
+        getContent(); 
+</script>
